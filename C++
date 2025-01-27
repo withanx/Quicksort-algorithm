@@ -1,0 +1,65 @@
+#include <iostream>
+
+using namespace std;
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class QuickSort {
+public:
+    void sort(int arr[], int size) { 
+        quickSort(arr, 0, size-1);
+    }
+
+private:
+    void quickSort(int arr[], int left, int right) { //intergers for bringing the numbers from left to right (makes sorting easier)
+        if (left < right) {
+            int pivotIndex = partition(arr, left, right);
+            quickSort(arr, left, pivotIndex-1);
+            quickSort(arr, pivotIndex+1, right);
+        }
+    }
+
+    int partition(int arr[], int left, int right) { //brings the numbers from left to right literally
+        int pivot = arr[right];
+        int l = left - 1;
+        for (int r = left; r < right; r++) {
+            if (arr[r] < pivot) {
+                l++;
+                swap(arr[l], arr[r]);
+            }
+        }
+        swap(arr[l+1], arr[right]); //swaps the numbers in array
+        return l+1;
+    }
+
+    void swap(int& p, int& q) { //swap intergers
+        int tmp = p;
+        p = q;
+        q = tmp;
+    }
+};
+
+int main(){
+cout <<"How many numbers do you want to input?\n";
+    int n;
+    cin>>n;
+
+
+
+    int arr[n];
+
+    for(int i = 0;i < n;i++){
+        cin>>arr[i];
+    }
+
+    QuickSort qSort;
+    qSort.sort(arr, n);
+    cout <<"Here are the sorted numbers:\n";
+
+    for(int i = 0;i < n;i++){
+        cout <<arr[i]<<" "; //couts the sorted numbers
+    }
+    return 0;
+}
